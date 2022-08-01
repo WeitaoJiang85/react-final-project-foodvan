@@ -5,7 +5,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "../styles/Gallery.css";
 
-import { Keyboard, Pagination, Navigation } from "swiper";
+import { Keyboard, Pagination, Navigation, Mousewheel } from "swiper";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export default function Gallery() {
@@ -20,7 +20,6 @@ export default function Gallery() {
       })
       .then((jsonData) => {
         if (jsonData.stat === "ok") {
-          console.log(jsonData.photos);
           const searchResult = jsonData.photos.photo.map((item) => ({
             id: item.id,
             title: item.title,
@@ -47,26 +46,27 @@ export default function Gallery() {
         More deliciousness by foodie owner Gavin
       </h1>
       <Swiper
-        slidesPerView={1}
+        slidesPerView={3}
         spaceBetween={30}
+        slidesPerGroup={3}
+        loop={true}
+        loopFillGroupWithBlank={true}
         keyboard={{
           enabled: true,
         }}
+        mousewheel={true}
         pagination={{
           clickable: true,
         }}
         navigation={true}
-        modules={[Keyboard, Pagination, Navigation]}
+        modules={[Pagination, Navigation, Mousewheel, Keyboard]}
         className="mySwiper"
       >
-        {images.map((item) => {
-          return (
-            <SwiperSlide key={item.id}>
-              <h2>{item.title}</h2>
-              <img src={item.url} alt={item.title} />
-            </SwiperSlide>
-          );
-        })}
+        {images.map((item) => (
+          <SwiperSlide key={item.id}>
+            <img src={item.url} alt={item.title} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
