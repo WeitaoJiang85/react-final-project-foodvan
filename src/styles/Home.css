@@ -21,10 +21,10 @@
   font-size: 80px;
   height: 60px;
   font-weight: 700;
-
+  letter-spacing: 3px;
   color: white;
   margin-bottom: 60px;
-  font-family: 'Carter One', cursive;
+  font-family: "Carter One", cursive;
 }
 
 .headerContainer p {
@@ -32,7 +32,8 @@
   font-size: 60px;
   font-weight: bold;
   color: white;
-  font-family: 'Square Peg', cursive;
+  letter-spacing: 2px;
+  font-family: "Square Peg", cursive;
 }
 
 .headerContainer button {

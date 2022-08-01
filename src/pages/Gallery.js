@@ -1,81 +1,73 @@
-import { useState, useEffect } from 'react'
-import ImageList from '@mui/material/ImageList'
-import ImageListItem from '@mui/material/ImageListItem'
-import PaginationButtons from '../component/PaginationButtons'
-import SearchResults from './SearchResults'
+import { useState, useEffect, useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "../styles/Gallery.css";
 
-const API_KEY = process.env.REACT_APP_API_KEY
+import { Keyboard, Pagination, Navigation } from "swiper";
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 export default function Gallery() {
-  const [result, setResult] = useState([])
-  const [page, setPage] = useState(1)
-  const [totalPages, setTotalPages] = useState(0)
+  const [result, setResult] = useState([]);
 
   useEffect(() => {
     fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.people.getPhotos&api_key=${API_KEY}&user_id=196116593%40N05&per_page=3&page=${page}&format=json&nojsoncallback=1`
+      `https://www.flickr.com/services/rest/?method=flickr.people.getPhotos&api_key=${API_KEY}&user_id=196116593%40N05&per_page=58&page=1&format=json&nojsoncallback=1`
     )
       .then((res) => {
-        return res.json()
+        return res.json();
       })
       .then((jsonData) => {
-        if (jsonData.stat === 'ok') {
-          console.log(jsonData.photos)
+        if (jsonData.stat === "ok") {
+          console.log(jsonData.photos);
           const searchResult = jsonData.photos.photo.map((item) => ({
             id: item.id,
             title: item.title,
-            owner: item.owner,
             secret: item.secret,
             server_id: item.server,
-          }))
-          setResult(searchResult)
+          }));
+          setResult(searchResult);
         }
-        setTotalPages(jsonData.photos.pages)
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }, [page])
+        console.log(error);
+      });
+  }, []);
+
+  const images = result.map((item) => ({
+    key: item.id,
+    title: item.title,
+    url: `https://live.staticflickr.com/${item.server_id}/${item.id}_${item.secret}_c.jpg`,
+  }));
 
   return (
-    <>
-      <h1>More deliciousness presented by our foodish owner Gavin</h1>
-      <ImageList
-        sx={{
-          width: '60vw',
-          height: '80vh',
-          margin: '10px auto ',
-          justifyContent: 'center',
+    <div className="gallery-page">
+      <h1 className="gallery-page-title ">
+        More deliciousness by foodie owner Gavin
+      </h1>
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={30}
+        keyboard={{
+          enabled: true,
         }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Keyboard, Pagination, Navigation]}
+        className="mySwiper"
       >
-        <ImageListItem
-          key="Subheader"
-          cols={3}
-          sx={{
-            width: '80vh',
-            height: '80vh',
-            margin: '10px auto ',
-            objectFit: 'cover',
-          }}
-        ></ImageListItem>
-        {result.map((item) => (
-          <SearchResults
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            owner={item.owner}
-            secret={item.secret}
-            server_id={item.server_id}
-          />
-        ))}
-      </ImageList>
-
-      <br />
-      <PaginationButtons
-        totalPages={totalPages}
-        setPage={setPage}
-        currentPage={page}
-      />
-    </>
-  )
+        {images.map((item) => {
+          return (
+            <SwiperSlide key={item.id}>
+              <h2>{item.title}</h2>
+              <img src={item.url} alt={item.title} />
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    </div>
+  );
 }
