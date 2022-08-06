@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -34,12 +34,6 @@ export default function Gallery() {
       });
   }, []);
 
-  const images = result.map((item) => ({
-    key: item.id,
-    title: item.title,
-    url: `https://live.staticflickr.com/${item.server_id}/${item.id}_${item.secret}_c.jpg`,
-  }));
-
   return (
     <div className="gallery-page">
       <h1 className="gallery-page-title ">
@@ -62,9 +56,12 @@ export default function Gallery() {
         modules={[Pagination, Navigation, Mousewheel, Keyboard]}
         className="mySwiper"
       >
-        {images.map((item) => (
+        {result.map((item) => (
           <SwiperSlide key={item.id}>
-            <img src={item.url} alt={item.title} />
+            <img
+              src={`https://live.staticflickr.com/${item.server_id}/${item.id}_${item.secret}_c.jpg`}
+              alt={item.title}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

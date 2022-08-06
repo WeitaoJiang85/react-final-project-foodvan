@@ -1,5 +1,5 @@
-import ErrorPhoto from '../imges/ErrorPhoto.jpg'
-import '../styles/Errorpage.css'
+import ErrorPhoto from "../assets/ErrorPhoto.jpg";
+import "../styles/Errorpage.css";
 
 export default function Errorpage() {
   return (
@@ -9,5 +9,5 @@ export default function Errorpage() {
     >
       <h1 className="errorpage-title"> Uh oh, that page doesn't exist.</h1>
     </div>
-  )
+  );
 }

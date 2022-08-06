@@ -1,20 +1,20 @@
-import { useState } from 'react'
-import Logo from '../imges/GoodgoLogo.png'
-import { Link } from 'react-router-dom'
-import ReorderIcon from '@mui/icons-material/Reorder'
-import '../styles/Navbar.css'
+import { useState } from "react";
+import Logo from "../assets/GoodgoLogo.png";
+import { Link } from "react-router-dom";
+import ReorderIcon from "@mui/icons-material/Reorder";
+import "../styles/Navbar.css";
 
 export default function Navbar() {
-  const [openLinks, setOpenLinks] = useState(false)
+  const [openLinks, setOpenLinks] = useState(false);
 
   const toggleNavbar = () => {
-    setOpenLinks(!openLinks)
-  }
+    setOpenLinks(!openLinks);
+  };
   return (
     <div className="navbar">
-      <div className="leftSide" id={openLinks ? 'open' : 'close'}>
+      <div className="leftSide" id={openLinks ? "open" : "close"}>
         <Link to="/">
-          <img src={Logo} alt={'good go chinese street food logo'} />
+          <img src={Logo} alt={"good go chinese street food logo"} />
         </Link>
         <div className="hiddenLinks">
           <Link to="/"> Home </Link>
@@ -35,5 +35,5 @@ export default function Navbar() {
         </button>
       </div>
     </div>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import Foodvan from '../imges/Foodvan.jpg'
-import '../styles/About.css'
+import Foodvan from "../assets/Foodvan.jpg";
+import "../styles/About.css";
 
 export default function About() {
   return (
@@ -37,5 +37,5 @@ export default function About() {
         </p>
       </div>
     </div>
-  )
+  );
 }

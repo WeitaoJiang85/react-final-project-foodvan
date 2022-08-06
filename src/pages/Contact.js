@@ -1,6 +1,6 @@
-import Cooking from '../imges/Cooking.jpg'
-import '../styles/Contact.css'
-import { Link } from 'react-router-dom'
+import Cooking from "../assets/Cooking.jpg";
+import "../styles/Contact.css";
+import { Link } from "react-router-dom";
 
 function Contact() {
   return (
@@ -30,7 +30,7 @@ function Contact() {
         </form>
       </div>
     </div>
-  )
+  );
 }
 
-export default Contact
+export default Contact;

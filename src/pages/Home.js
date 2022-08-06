@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
-import Banner from '../imges/Banner.jpg'
-import '../styles/Home.css'
+import { Link } from "react-router-dom";
+import Banner from "../assets/Banner.jpg";
+import "../styles/Home.css";
 
 export default function Home() {
   return (
@@ -14,5 +14,5 @@ export default function Home() {
         </Link>
       </div>
     </div>
-  )
+  );
 }
