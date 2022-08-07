@@ -46,10 +46,10 @@ function Menu() {
       0
     );
     setTotalItems(newTotalItems);
-    console.log(totalItems);
+    console.log(`totalItems:`, totalItems);
   };
 
-  useEffect(() => handleTotalItems(), [shoppingcart, quantity]);
+  useEffect(() => handleTotalItems());
 
   const handleTotalPrice = () => {
     const newTotalPrice = shoppingcart.reduce(
@@ -57,10 +57,10 @@ function Menu() {
       0
     );
     setTotalPrice(newTotalPrice);
-    console.log(totalPrice);
+    console.log(`totalprice`, totalPrice);
   };
 
-  useEffect(() => handleTotalPrice(), [shoppingcart, quantity]);
+  useEffect(() => handleTotalPrice());
 
   const handleRemove = (id) => {
     const newList = products.map((item) =>
@@ -74,6 +74,7 @@ function Menu() {
 
   const handleChange = (e, id) => {
     setQuantity(e.target.value);
+    console.log(quantity);
     if (e.target.value > 0) {
       const newShopping = shoppingcart.filter((item) => item.id === id);
       if (newShopping.length > 0) {
@@ -89,7 +90,9 @@ function Menu() {
         item.id === id ? { ...item, isAdded: false, qty: 0 } : item
       );
       setProducts(newList);
+      console.log(`products`, products);
       setShoppingCart(shoppingcart.filter((item) => item.id !== id));
+      console.log(`products`, products);
     }
   };
 
@@ -100,7 +103,7 @@ function Menu() {
       setShoppingCart([...shoppingcart, { ...newShopping[0] }]);
     }
 
-    console.log(`shoppingcart`, shoppingcart);
+    console.log(`products`, products);
     console.log(`products`, products);
   };
 
