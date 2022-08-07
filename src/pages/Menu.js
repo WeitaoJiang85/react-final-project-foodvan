@@ -1,16 +1,17 @@
 import { ProductList } from "./ProductList";
 import MenuItem from "../component/MenuItem";
 import "../styles/Menu.css";
-import { useState } from "react";
-
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../App";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 function Menu() {
   const [products, setProducts] = useState(ProductList);
-  const [shoppingcart, setShoppingCart] = useState([]);
-  const [totalprice, setTotalPrice] = useState(0);
-  const [totalitems, setTotalItems] = useState(0);
+  const [quantity, setQuantity] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
+  const { shoppingcart, setShoppingCart } = useContext(Context);
 
   const filter = (keyword) => {
     if (keyword === "all") {
@@ -31,71 +32,85 @@ function Menu() {
   };
 
   const sortByPrice = (keyword) => {
-    const newproducts = products.slice();
+    const newProducts = products.slice();
     if (keyword === "up") {
-      setProducts(newproducts.sort((a, b) => a.price - b.price));
+      setProducts(newProducts.sort((a, b) => a.price - b.price));
     } else if (keyword === "down") {
-      setProducts(newproducts.sort((a, b) => b.price - a.price));
+      setProducts(newProducts.sort((a, b) => b.price - a.price));
     } else setProducts(products);
   };
 
-  const handleTotalPrice = () => {
-    let totalPrice = shoppingcart.reduce(
-      (sum, e) => sum + Number(e.subtotal || 0),
-      0
-    );
-    return totalPrice;
-  };
-
   const handleTotalItems = () => {
-    let totalitems = shoppingcart.reduce(
-      (sum, e) => sum + Number(e.quantity || 0),
+    const newTotalItems = shoppingcart.reduce(
+      (sum, e) => sum + Number(e.qty),
       0
     );
-    return totalitems;
+    setTotalItems(newTotalItems);
+    console.log(totalItems);
   };
 
-  /* const handleCart = () => {
-    let cart = products.filter((item) => item.isAdded === true);
-    console.log(cart);
-  };*/
+  useEffect(() => handleTotalItems(), [shoppingcart, quantity]);
+
+  const handleTotalPrice = () => {
+    const newTotalPrice = shoppingcart.reduce(
+      (sum, e) => sum + Number(e.qty * e.price),
+      0
+    );
+    setTotalPrice(newTotalPrice);
+    console.log(totalPrice);
+  };
+
+  useEffect(() => handleTotalPrice(), [shoppingcart, quantity]);
 
   const handleRemove = (id) => {
-    const newcart = shoppingcart.filter((item) => item.id !== id);
-    setShoppingCart([...newcart]);
-    setTotalPrice(handleTotalPrice());
-    setTotalItems(handleTotalItems());
-    const delitem = products.filter((item) => item.id === id);
-    delitem[0].isAdded = false;
-    delitem[0].quantity = 0;
-    delitem[0].subtotal = 0;
-
+    const newList = products.map((item) =>
+      item.id === id ? { ...item, isAdded: false, qty: 0 } : item
+    );
+    setProducts(newList);
+    setShoppingCart(shoppingcart.filter((item) => item.id !== id));
     console.log(`shoppingcart`, shoppingcart);
     console.log(`products`, products);
   };
-  const handleQuantityChange = (e, id) => {
-    const newshopping = products.filter((item) => item.id === id);
 
+  const handleChange = (e, id) => {
+    setQuantity(e.target.value);
     if (e.target.value > 0) {
-      newshopping[0].isAdded = true;
-      newshopping[0].quantity = e.target.value;
-      newshopping[0].subtotal = e.target.value * newshopping[0].price;
-      console.log(`newshopping`, newshopping);
+      const newShopping = shoppingcart.filter((item) => item.id === id);
+      if (newShopping.length > 0) {
+        newShopping[0].qty = e.target.value;
+        console.log(`newshopping1`, newShopping);
+      } else {
+        const newShopping = products.filter((item) => item.id === id);
+        newShopping[0].qty = e.target.value;
+        console.log(`newshopping2`, newShopping);
+      }
+    } else {
+      const newList = products.map((item) =>
+        item.id === id ? { ...item, isAdded: false, qty: 0 } : item
+      );
+      setProducts(newList);
+      setShoppingCart(shoppingcart.filter((item) => item.id !== id));
+    }
+  };
+
+  const handleAdd = (id) => {
+    const newShopping = products.filter((item) => item.id === id);
+    if (newShopping[0].isAdded === false) {
+      newShopping[0].isAdded = true;
+      setShoppingCart([...shoppingcart, { ...newShopping[0] }]);
     }
 
-    const cart = products.filter((item) => item.isAdded === true);
-    setShoppingCart(cart);
-    setTotalPrice(handleTotalPrice());
-    setTotalItems(handleTotalItems());
+    console.log(`shoppingcart`, shoppingcart);
+    console.log(`products`, products);
   };
 
   return (
     <div className="menu">
       <h1 className="menuTitle">Our Menu</h1>
-      <p>
-        <span>Total Items: {totalitems}</span>
+      <p className="info-bar">
+        <span>Total Items: {totalItems}</span>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <span>Total Price: $ {totalprice}</span>
+        <span>Total Price: $ {totalPrice}</span>
       </p>
       <div className="filter">
         <ToggleButtonGroup
@@ -151,9 +166,7 @@ function Menu() {
         {products.map((item) => {
           return (
             <MenuItem
-              products={products}
               key={item.id}
-              index={item.index}
               id={item.id}
               name={item.name}
               imgURL={item.imgURL}
@@ -162,11 +175,12 @@ function Menu() {
               spiciness={item.spiciness}
               isGF={item.isGF}
               isVegan={item.isVegan}
-              quantity={item.quantity}
+              qty={item.qty}
               subtotal={item.subtotal}
               isAdded={item.isAdded}
-              handleQuantityChange={handleQuantityChange}
-              handleRemove={() => handleRemove(item.id)}
+              handleChange={(e) => handleChange(e, item.id)}
+              handleRemove={(e) => handleRemove(e, item.id)}
+              handleAdd={() => handleAdd(item.id)}
             />
           );
         })}

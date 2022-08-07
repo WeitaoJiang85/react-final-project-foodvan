@@ -1,4 +1,5 @@
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 export default function MenuItem({
   id,
@@ -9,11 +10,11 @@ export default function MenuItem({
   spiciness,
   isGF,
   isVegan,
-  quantity,
-  subtotal,
   isAdded,
   handleRemove,
-  handleQuantityChange,
+  handleChange,
+  handleAdd,
+  qty,
 }) {
   return (
     <div className="menuItem">
@@ -43,12 +44,14 @@ export default function MenuItem({
           min="0"
           max="20"
           placeholder="0"
-          onChange={(e) => handleQuantityChange(e, id)}
+          onChange={(e) => handleChange(e, id)}
         />
+        <button type="button" onClick={() => handleAdd(id)}>
+          <AddShoppingCartIcon />
+        </button>
         <button type="reset" onClick={() => handleRemove(id)}>
           <DeleteForeverIcon />
         </button>
-        <span>$: {subtotal}</span>
       </form>
     </div>
   );

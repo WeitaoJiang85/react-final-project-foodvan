@@ -10,10 +10,12 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 export default function Gallery() {
   const [result, setResult] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.people.getPhotos&api_key=${API_KEY}&user_id=196116593%40N05&per_page=58&page=1&format=json&nojsoncallback=1`
+      `https://www.flickr.com/services/rest/?method=flickr.people.getPhotos&api_key=${API_KEY}&user_id=196116593%40N05&per_page=30&page=1&format=json&nojsoncallback=1`
     )
       .then((res) => {
         return res.json();
@@ -27,6 +29,7 @@ export default function Gallery() {
             server_id: item.server,
           }));
           setResult(searchResult);
+          setLoading(false);
         }
       })
       .catch((error) => {
@@ -34,6 +37,7 @@ export default function Gallery() {
       });
   }, []);
 
+  if (loading === true) return <h1>Loading...</h1>;
   return (
     <div className="gallery-page">
       <h1 className="gallery-page-title ">
