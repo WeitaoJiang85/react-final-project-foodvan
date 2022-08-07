@@ -33,7 +33,8 @@ export default function About() {
           I had received years of Chinese food training from my father.He is a
           professional chef who has been in the industry for more than 30 years.
           I have always had a great passion for food cooking and spreading
-          Chinese food culture.
+          Chinese food culture. This is the most important part of my small
+          business.
         </p>
       </div>
     </div>
