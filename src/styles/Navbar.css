@@ -31,19 +31,14 @@
 .cartInfo {
   width: 120px;
   margin-left: 40px;
-  display: flex;
+  display: inline;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-.cartIcon {
-  display: flex;
-  flex: 40%;
-}
-
-.monetIcon {
-  display: flex;
-  flex: 40%;
+.totalPrice {
+  padding: 4px;
+  font-size: medium;
 }
 .navbar a {
   color: black;

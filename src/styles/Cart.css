@@ -1,0 +1,28 @@
+.table {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+  text-align: center;
+}
+.table-title {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-weight: 500;
+  font-size: 70px;
+  margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 1300px) {
+  .tableList {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .tableList {
+    grid-template-columns: 1fr;
+  }
+}

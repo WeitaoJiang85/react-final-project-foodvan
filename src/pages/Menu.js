@@ -117,11 +117,6 @@ function Menu() {
   return (
     <div className="menu">
       <h1 className="menuTitle">Our Menu</h1>
-      <p className="info-bar">
-        <span>Total Items: {totalItems}</span>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <span>Total Price: $ {totalPrice}</span>
-      </p>
       <div className="filter">
         <ToggleButtonGroup
           exclusive
@@ -186,14 +181,12 @@ function Menu() {
               id={item.id}
               name={item.name}
               imgURL={item.imgURL}
-              cat={item.cat}
               price={item.price}
               spiciness={item.spiciness}
               isGF={item.isGF}
               isVegan={item.isVegan}
               qty={item.qty}
               subtotal={item.subtotal}
-              isAdded={item.isAdded}
               handleChange={(e) => handleChange(e, item.id)}
               handleRemove={(e) => handleRemove(e, item.id)}
               handleAdd={() => handleAdd(item.id)}

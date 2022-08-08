@@ -22,15 +22,15 @@ export default function MenuItem({
       <p>
         <span> $ {price}.00 </span>
         {spiciness === 1 ? (
-          <span span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
+          <span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
             🌶️
           </span>
         ) : spiciness === 2 ? (
-          <span span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
+          <span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
             🌶️🌶️
           </span>
         ) : spiciness === 3 ? (
-          <span span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
+          <span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
             🌶️🌶️🌶️
           </span>
         ) : null}
@@ -43,12 +43,13 @@ export default function MenuItem({
         </span>
       </p>
       <form>
+        <span style={{ fontWeight: "bolder" }}>Quantity:</span>
         <input
           type="number"
           name={name}
           min="0"
           max="20"
-          placeholder="0"
+          placeholder={qty}
           onChange={(e) => handleChange(e, id)}
         />
         <button type="button" onClick={() => handleAdd(id)}>
