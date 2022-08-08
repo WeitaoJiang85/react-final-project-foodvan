@@ -22,11 +22,17 @@ export default function MenuItem({
       <p>
         <span> $ {price}.00 </span>
         {spiciness === 1 ? (
-          <span>🌶️</span>
+          <span span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
+            🌶️
+          </span>
         ) : spiciness === 2 ? (
-          <span>🌶️🌶️</span>
+          <span span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
+            🌶️🌶️
+          </span>
         ) : spiciness === 3 ? (
-          <span>🌶️🌶️🌶️</span>
+          <span span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
+            🌶️🌶️🌶️
+          </span>
         ) : null}
 
         <span hidden={!isGF}>

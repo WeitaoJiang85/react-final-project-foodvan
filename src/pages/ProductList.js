@@ -1,4 +1,3 @@
-import React from "react";
 import BbqPorkFriedRcie from "../assets/BbqPorkFriedRcie.jpg";
 import BbqPorkNoodle from "../assets/BbqPorkNoodle.jpg";
 import CrispyChickenSkewers from "../assets/CrispyChickenSkewers.jpg";

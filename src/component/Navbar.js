@@ -9,9 +9,7 @@ import PaymentIcon from "@mui/icons-material/Payment";
 import "../styles/Navbar.css";
 
 export default function Navbar() {
-  const { totalPrice, setTotalPrice, totalItems, setTotalItems } = useContext(
-    Context
-  );
+  const { totalPrice, totalItems } = useContext(Context);
 
   const [openLinks, setOpenLinks] = useState(false);
 

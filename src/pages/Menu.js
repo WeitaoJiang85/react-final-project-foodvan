@@ -165,10 +165,16 @@ function Menu() {
           laber=""
         >
           <ToggleButton value="up" aria-label="gluten free">
-            Price⬆️
+            Price
+            <span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
+              ⬆️
+            </span>
           </ToggleButton>
           <ToggleButton value="down" aria-label="vegetarian">
-            Price⬇️
+            Price
+            <span role="img" aria-labelledby="jsx-a11y/accessible-emoji">
+              ⬇️
+            </span>
           </ToggleButton>
         </ToggleButtonGroup>
       </div>
