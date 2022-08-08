@@ -1,10 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Keyboard, Pagination, Navigation, Mousewheel } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import { Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react/swiper-react.js";
+import "swiper/swiper-bundle.min.css";
+import "swiper/swiper.min.css";
+import "swiper/modules/pagination/pagination.min.css";
+import "swiper/modules/navigation/navigation.min.css";
 import "../styles/Gallery.css";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -58,7 +59,7 @@ export default function Gallery() {
           clickable: true,
         }}
         navigation={true}
-        modules={[Pagination, Navigation, Mousewheel, Keyboard]}
+        modules={[Pagination, Navigation]}
         className="mySwiper"
       >
         {result.map((item) => (

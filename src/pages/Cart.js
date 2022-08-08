@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ProductList } from "./ProductList";
 import MenuItem from "../component/MenuItem";
 import "../styles/Menu.css";
@@ -6,19 +6,12 @@ import { Context } from "../App";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
-function Menu() {
-  const {
-    shoppingcart,
-    setShoppingCart,
-    products,
-    setProducts,
-    quantity,
-    setQuantity,
-    totalPrice,
-    setTotalPrice,
-    totalItems,
-    setTotalItems,
-  } = useContext(Context);
+function Cart() {
+  const [products, setProducts] = useState(ProductList);
+  const [quantity, setQuantity] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
+  const { shoppingcart, setShoppingCart } = useContext(Context);
 
   const filter = (keyword) => {
     if (keyword === "all") {
@@ -199,4 +192,4 @@ function Menu() {
   );
 }
 
-export default Menu;
+export default Cart;

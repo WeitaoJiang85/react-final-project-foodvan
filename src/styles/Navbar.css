@@ -10,7 +10,7 @@
 }
 
 .navbar .leftSide {
-  flex: 50%;
+  flex: 60%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -22,13 +22,29 @@
 }
 
 .navbar .rightSide {
-  flex: 50%;
+  flex: 40%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+.cartInfo {
+  width: 120px;
+  margin-left: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
+.cartIcon {
+  display: flex;
+  flex: 40%;
+}
+
+.monetIcon {
+  display: flex;
+  flex: 40%;
+}
 .navbar a {
   color: black;
   text-decoration: none;
