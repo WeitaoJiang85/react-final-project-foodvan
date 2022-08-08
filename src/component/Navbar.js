@@ -69,12 +69,11 @@ export default function Navbar() {
           <div className="cartInfo">
             <span
               className="cartIcon"
-              button
               aria-describedby={id}
               type="button"
               onClick={handleClick}
             >
-              <Badge badgeContent={totalItems} color="primary" v>
+              <Badge badgeContent={totalItems} color="primary">
                 <ShoppingCartIcon fontSize="small" />
               </Badge>
             </span>

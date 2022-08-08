@@ -1,8 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-
 import { Context } from "../App";
-import { height } from "@mui/system";
 
 function Cart() {
   const {
