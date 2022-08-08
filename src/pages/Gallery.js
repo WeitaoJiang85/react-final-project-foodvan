@@ -1,11 +1,12 @@
+import React from "react";
 import { useState, useEffect } from "react";
+import { Keyboard, Pagination, Navigation, Mousewheel } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 import "../styles/Gallery.css";
 
-import { Keyboard, Pagination, Navigation, Mousewheel } from "swiper";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export default function Gallery() {

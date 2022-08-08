@@ -1,7 +1,8 @@
-import InstagramIcon from '@mui/icons-material/Instagram'
-import FacebookIcon from '@mui/icons-material/Facebook'
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import '../styles/Footer.css'
+import React from "react";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import "../styles/Footer.css";
 
 function Footer() {
   return (
@@ -31,7 +32,7 @@ function Footer() {
       </div>
       <p> &copy; 2022 Goodgo Chinese Street Food</p>
     </div>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

@@ -1,3 +1,4 @@
+import React from "react";
 import Foodvan from "../assets/Foodvan.jpg";
 import "../styles/About.css";
 

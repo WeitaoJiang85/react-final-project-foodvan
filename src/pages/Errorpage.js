@@ -1,3 +1,4 @@
+import React from "react";
 import ErrorPhoto from "../assets/ErrorPhoto.jpg";
 import "../styles/Errorpage.css";
 

@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import Logo from "../assets/GoodgoLogo.png";
 import { Link } from "react-router-dom";

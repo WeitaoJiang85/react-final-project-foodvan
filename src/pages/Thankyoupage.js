@@ -1,3 +1,4 @@
+import React from "react";
 import Thank from "../assets/CommentPhoto.jpg";
 import "../styles/Thankyoupage.css";
 

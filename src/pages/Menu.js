@@ -1,3 +1,4 @@
+import React from "react";
 import { ProductList } from "./ProductList";
 import MenuItem from "../component/MenuItem";
 import "../styles/Menu.css";

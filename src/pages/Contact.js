@@ -1,3 +1,4 @@
+import React from "react";
 import Cooking from "../assets/Cooking.jpg";
 import "../styles/Contact.css";
 import { Link } from "react-router-dom";

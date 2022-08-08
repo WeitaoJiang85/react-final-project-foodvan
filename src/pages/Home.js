@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import Banner from "../assets/Banner.jpg";
 import "../styles/Home.css";
