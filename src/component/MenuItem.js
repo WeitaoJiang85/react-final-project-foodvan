@@ -14,6 +14,7 @@ export default function MenuItem({
   handleChange,
   handleAdd,
   qty,
+  isAdded,
 }) {
   return (
     <div className="menuItem">
@@ -49,15 +50,17 @@ export default function MenuItem({
           name={name}
           min="0"
           max="20"
-          placeholder={qty}
+          placeholder="0"
           onChange={(e) => handleChange(e, id)}
         />
         <button type="button" onClick={() => handleAdd(id)}>
           <AddShoppingCartIcon />
         </button>
-        <button type="reset" onClick={() => handleRemove(id)}>
-          <DeleteForeverIcon />
-        </button>
+        {isAdded === true ? (
+          <button type="reset" onClick={() => handleRemove(id)}>
+            <DeleteForeverIcon />
+          </button>
+        ) : null}
       </form>
     </div>
   );

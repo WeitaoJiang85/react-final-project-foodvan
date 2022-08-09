@@ -5,10 +5,8 @@ import { Link } from "react-router-dom";
 import ReorderIcon from "@mui/icons-material/Reorder";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
 import Box from "@mui/material/Box";
-import Popper from "@mui/material/Popper";
-import Fade from "@mui/material/Fade";
+import Modal from "@mui/material/Modal";
 import Cart from "../pages/Cart";
 
 import "../styles/Navbar.css";
@@ -20,16 +18,25 @@ export default function Navbar() {
     setOpenLinks(!openLinks);
   };
 
-  const [open, setOpen] = React.useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-    setOpen((previousOpen) => !previousOpen);
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "640px",
+    height: "60%",
+    display: "flex",
+    flexDirection: "row",
+    padding: "10px",
+    borderRadius: "10px",
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    overflow: "scroll",
   };
-
-  const canBeOpen = open && Boolean(anchorEl);
-  const id = canBeOpen ? "transition-popper" : undefined;
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <div className="navbar">
@@ -46,14 +53,22 @@ export default function Navbar() {
 
           {totalItems === 0 ? null : (
             <div className="cartInfo">
-              <Link to="/cart">
-                <span className="cartIcon">
-                  <Badge badgeContent={totalItems} color="primary">
-                    <ShoppingCartIcon fontSize="small" />
-                  </Badge>
-                </span>
-                <span className="moneyIcon">{`Total:$${totalPrice}`}</span>
-              </Link>
+              <span className="cartIcon" type="button" onClick={handleOpen}>
+                <Badge badgeContent={totalItems} color="primary">
+                  <ShoppingCartIcon fontSize="small" />
+                </Badge>
+              </span>
+              <span className="totalPrice">{`$${totalPrice}.00`}</span>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Cart />
+                </Box>
+              </Modal>
             </div>
           )}
         </div>
@@ -65,29 +80,25 @@ export default function Navbar() {
         <Link to="/about"> About </Link>
         <Link to="/contact"> Contact </Link>
         <Link to="/gallery"> Gallery </Link>
+
         {totalItems === 0 ? null : (
           <div className="cartInfo">
-            <span
-              className="cartIcon"
-              aria-describedby={id}
-              type="button"
-              onClick={handleClick}
-            >
+            <span className="cartIcon" type="button" onClick={handleOpen}>
               <Badge badgeContent={totalItems} color="primary">
                 <ShoppingCartIcon fontSize="small" />
               </Badge>
             </span>
-
             <span className="totalPrice">{`$${totalPrice}.00`}</span>
-            <Popper id={id} open={open} anchorEl={anchorEl} transition>
-              {({ TransitionProps }) => (
-                <Fade {...TransitionProps} timeout={350}>
-                  <Box sx={{ border: 1, bgcolor: "background.paper" }}>
-                    <Cart />
-                  </Box>
-                </Fade>
-              )}
-            </Popper>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Cart />
+              </Box>
+            </Modal>
           </div>
         )}
 
