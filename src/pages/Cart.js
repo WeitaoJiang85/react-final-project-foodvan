@@ -20,7 +20,7 @@ function Cart() {
 
   return (
     <div className="cart">
-      <h1 className="cart-title">You Order</h1>
+      <h1 className="cart-title">Your Order</h1>
       <table className="table">
         <thead>
           <tr className="table-header">
